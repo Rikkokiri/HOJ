@@ -5,6 +5,8 @@ public class Lokero {
 	
 	public Lokero(){
 		
+		//Kirjoitan turhan kommentin.	
+		
 	}
 	
 }
