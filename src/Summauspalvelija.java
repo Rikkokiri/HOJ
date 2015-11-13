@@ -6,7 +6,9 @@ public class Summauspalvelija extends Thread{
 		
 	}//Summauspalvelija konstruktori
 	
-	
+	public void run(){
+		
+	}//run
 	
 	
 }//Summauspalvelija
