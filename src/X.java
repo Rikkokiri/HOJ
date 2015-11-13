@@ -1,4 +1,4 @@
-package HOJ{
+package src{
 
 public class X{
 
