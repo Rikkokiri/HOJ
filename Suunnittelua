@@ -1,0 +1,32 @@
+Hajautettujen järjestelmien harjoitustyö
+
+1. UDP-paketti Y:n porttiin 3126
+
+2. X alkaa kuunnella UDP-paketissa annettua porttia
+	2.1. Jos Y ei ota yhteyttä 5 s kuluessa niin, paketti lähetetään uudelleen
+		- Uudelleen lähetys max 4 kertaa (max 5 lähetystä)
+			—> X lopettaa itsensä
+
+3. Yhteys muodostettu
+	3.1. Pystyyn ObjectInput/OutputStream
+
+4. Y ilmoittaa kokonaisluvun t väliltä 2… 10
+	4.1. Jos ei lukua 5 sekunnin kuluessa
+		4.1.1. Lähettää Y:lle luvun -1
+		4.1.2. X 
+
+
+
+Luokat
+
+- Summauspalvelija perii Threadin
+
+- Luokka X (pääluokka)
+	- Main
+
+- Kommunikaattori-luokka
+	- Hoitaa kohdan 1
+	- Hoitaa kaiken kommunikaation
+
+- Lokero-luokka (tai vastaava)
+	
