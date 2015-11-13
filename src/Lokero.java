@@ -1,11 +1,11 @@
 
 public class Lokero {
 
-	int[][] summat; //Summauspalvelijoiden summien lista ja niiden portit
-	int summaustenLkm;
+	private int[][] summat; //Summauspalvelijoiden summien lista ja niiden portit
+	private int summaustenLkm;
 
 	//Konstruktori
-	//lkm = summauspalvelijoiden lukum‰‰r‰
+	//lkm = summauspalvelijoiden lukum√§√§r√§
 	public Lokero(int lkm){
 		this.summat = new int[lkm][2];
 		this.summaustenLkm = 0;
@@ -36,13 +36,13 @@ public class Lokero {
 	}//suurinSumma
 	
 	
-	//Palauttaa summattujen lukujen kokonaism‰‰r‰n
+	//Palauttaa summattujen lukujen kokonaism√§√§r√§n
 	public int lukujenKokonaismaara(){
 		return this.summaustenLkm;
 	}//lukujenKokonaismaara
 	
 	
-	//Lis‰‰ summat -taulukkoon tietyn summauspalvelijan saaman luvun
+	//Lis√§√§ summat -taulukkoon tietyn summauspalvelijan saaman luvun
 	public void lisaaLuku(int luku, int portti){
 		summaustenLkm = summaustenLkm + 1;
 		for (int i = 0; i < summat.length;i++){
