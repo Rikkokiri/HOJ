@@ -1,6 +1,9 @@
 package src{
 
 public class X{
+	public static void main(String[] args){
+		
+	}//main
 
 }//X
 }
