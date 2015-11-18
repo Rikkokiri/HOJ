@@ -27,7 +27,7 @@ public class Yhteydenmuodostus {
 		byte[] data = Integer.toString(XPORT).getBytes();
 		kohdeosoite = InetAddress.getByName(iposoite);
 		//Luodaan UDP-paketti
-		udpPacket = new DatagramPacket(data, data.length, y, YPORT);
+		udpPacket = new DatagramPacket(data, data.length, kohdeosoite, YPORT);
 		
 		//-- TCP --------
 		server = new ServerSocket(XPORT);
@@ -44,7 +44,7 @@ public class Yhteydenmuodostus {
 			byte[] data = Integer.toString(XPORT).getBytes();
 			kohdeosoite = InetAddress.getLocalHost();
 			//Luodaan UDP-paketti
-			udpPacket = new DatagramPacket(data, data.length, y, YPORT);
+			udpPacket = new DatagramPacket(data, data.length, kohdeosoite, YPORT);
 			
 			//-- TCP --------
 			server = new ServerSocket(XPORT);
