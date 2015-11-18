@@ -14,6 +14,7 @@ public class Summauspalvelija extends Thread{
 		super();
 		this.PORT = portti;
 		this.lokero = l;
+		t = 1;
 	}//konstruktori
 	
 	public void run(){
@@ -22,17 +23,28 @@ public class Summauspalvelija extends Thread{
 			s = server.accept();
 			InputStream iS = s.getInputStream();
 			ObjectInputStream in = new ObjectInputStream(iS);
+			s.setSoTimeout(3000);
 			//Lisätään lukuja kunnes tulee 0
 			while(t!=0){
 				t = in.readInt();
 				lokero.lisaaLuku(t, PORT);
-			}//while		
+			}//while	
+		} catch (EOFException eof){
+			try{
+				s.close();
+				server.close();
+				t=0;
+			}catch (Exception f){
+				throw new Error(f.toString());
+			}
 		} catch (Exception e){
 			throw new Error(e.toString());
 		}
+		
 		try{
 			s.close();
 			server.close();
+			t=0;
 		} catch (IOException a){
 			throw new Error(a.toString());
 		}
