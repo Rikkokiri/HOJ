@@ -21,6 +21,7 @@ public class Lokero {
 		for (int i = 0; i < summat.length; i++){
 			summa = summa + summat[i][0];
 		}
+		System.out.println("Summa on" + summa);
 		return summa;
 	}
 	
@@ -50,6 +51,7 @@ public class Lokero {
 	//Lisää summat -taulukkoon tietyn summauspalvelijan saaman luvun
 	synchronized public void lisaaLuku(int luku, int portti){
 		summaustenLkm = summaustenLkm + 1;
+		System.out.println("Lisaa-metodi");
 		for (int i = 0; i < summat.length;i++){
 			if (summat[i][1] == portti){
 				summat[i][0] = summat[i][0] + luku;

@@ -14,6 +14,7 @@ public class Summauspalvelija extends Thread{
 		super();
 		this.PORT = portti;
 		this.lokero = l;
+		t = 1;
 	}//konstruktori
 	
 	public void run(){
