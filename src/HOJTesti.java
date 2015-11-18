@@ -5,7 +5,7 @@ public class HOJTesti {
 	public static void main(String args[]) throws IOException{
 	
 		
-		Yhteydenmuodostus uusiyhteys = new Yhteydenmuodostus("130.232.237.244");
+		Yhteydenmuodostus uusiyhteys = new Yhteydenmuodostus();
 		
 		uusiyhteys.lahetaPortti();
 		

@@ -48,6 +48,7 @@ public class Kommunikaattori extends Thread{
 			//Lähetetään Y:lle -1
 			try{
 				out.writeInt(-1);
+				out.flush();
 			} catch (IOException exception){
 				//TODO
 			}
@@ -79,17 +80,21 @@ public class Kommunikaattori extends Thread{
 				//Palautetaan välitettyjen lukujen kokonaissumma
 				else if(syöte == 1){
 					out.writeInt(lokero.kokonaissumma());
+					out.flush();
 				}
 				
 				else if(syöte == 2){
 					out.writeInt(lokero.suurinSumma());
+					out.flush();
 				}
 				
 				else if(syöte == 3){
 					out.writeInt(lokero.lukujenKokonaismaara());
+					out.flush();
 				}
 				else{
 					out.writeInt(-1);
+					out.flush();
 				}
 				
 			} // while
@@ -100,11 +105,24 @@ public class Kommunikaattori extends Thread{
 		
 		//break hyppää tänne
 		
+		System.out.println("Ohjelman suorituksen tulisi päättyä."); //REMOVE
+		
+		try{
+			out.close();
+			in.close();
+			socket.close();
+		} catch(IOException e){
+			//TODO
+		}
+		
+		
 	}// run
 	
 	public void alustaSummauspalvelijat(){ //Nimeä uudelleen
 		
 		//Alustetaan portit //TODO
+		portit = new int[porttienLkm];
+		
 		for(int i = 0; i < porttienLkm; i++ ){
 			portit[i] = 20189 + i;
 		}
@@ -116,7 +134,8 @@ public class Kommunikaattori extends Thread{
 			for(int i = 0; i < porttienLkm; i++){
 				Summauspalvelija p = new Summauspalvelija(20189 + i, lokero);
 				p.start();
-				out.writeInt(20189 + i);
+				out.writeInt(portit[i]);
+				out.flush();
 			}
 		} catch (IOException e){
 			e.setStackTrace(getStackTrace()); //TODO
