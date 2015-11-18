@@ -11,6 +11,7 @@ public class Kommunikaattori extends Thread{
 	private int[] portit;
 	
 	private Lokero lokero;
+	private Summauspalvelija[] summauspalvelijat;
 	
 	//Konstruktori
 	public Kommunikaattori(Socket socket){
@@ -107,6 +108,12 @@ public class Kommunikaattori extends Thread{
 		
 		System.out.println("Ohjelman suorituksen tulisi päättyä."); //REMOVE
 		
+		//Lopetetaan summauspalvelijat
+		for(int i = 0; i < porttienLkm; i++){
+			summauspalvelijat[i].close();
+			
+		}
+		
 		try{
 			out.close();
 			in.close();
@@ -130,10 +137,12 @@ public class Kommunikaattori extends Thread{
 		//Luodaan tallenustila summauspalvelijoiden saamille luvuille
 		lokero = new Lokero(porttienLkm, portit);
 		
+		summauspalvelijat = new Summauspalvelija[porttienLkm];
+		
 		try{
 			for(int i = 0; i < porttienLkm; i++){
-				Summauspalvelija p = new Summauspalvelija(20189 + i, lokero);
-				p.start();
+				summauspalvelijat[i] = new Summauspalvelija(20189 + i, lokero);
+				summauspalvelijat[i].start();
 				out.writeInt(portit[i]);
 				out.flush();
 			}

@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 public class Yhteydenmuodostus {
 
 	//Y:n portti, johon sovellus ottaa yhteyttä
-	private static final int YPORT = 3126; //Suojausmääre? 
+	private static final int YPORT = 3130; //Suojausmääre? 
 	private static final int XPORT = 3000; //TODO määrittele/vaihda
 	private DatagramSocket udpSocket;
 	private DatagramPacket udpPacket;
