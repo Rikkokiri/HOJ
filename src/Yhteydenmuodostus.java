@@ -54,7 +54,8 @@ public class Yhteydenmuodostus {
 	//-------------------------------------------------	
 		
 	//TODO Nimeä metodi fiksummin
-	//lahetaPortti: Lähettää Y:lle UDP-paketin, joka 
+	/*lahetaPortti: Lähettää Y:lle UDP-paketin, joka sisältää X:n portin,
+	 * johon Y:n halutaan ottavan yhteyttä */
 	public boolean lahetaPortti() throws IOException{
 		
 		int toistoja = 0;
@@ -70,8 +71,12 @@ public class Yhteydenmuodostus {
 			try{
 				System.out.println("Päästäänkö tänne?");
 				socket = server.accept();
+				
 				//Testausta varten
 				System.out.println("Connection established to port" + socket.getPort());
+				//COMMENT
+				new Kommunikaattori(socket).start();
+				
 				vastausSaatu = true;
 
 			}catch(SocketTimeoutException e){
