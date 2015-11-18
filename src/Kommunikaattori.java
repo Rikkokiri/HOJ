@@ -6,6 +6,7 @@ public class Kommunikaattori extends Thread{
 	private Socket socket;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
+	private int viesti;
 	
 	private int porttienLkm;
 	private int[] portit;
@@ -68,28 +69,28 @@ public class Kommunikaattori extends Thread{
 		try{
 			socket.setSoTimeout(0);
 			
-			int syöte;
+			
 			
 			while(true){
-				syöte = in.readInt();
+				viesti = in.readInt();
 			
-				if(syöte == 0){
+				if(viesti == 0){
 					break;
 					//TODO sammutus
 				}
 				
 				//Palautetaan välitettyjen lukujen kokonaissumma
-				else if(syöte == 1){
+				else if(viesti == 1){
 					out.writeInt(lokero.kokonaissumma());
 					out.flush();
 				}
 				
-				else if(syöte == 2){
+				else if(viesti == 2){
 					out.writeInt(lokero.suurinSumma());
 					out.flush();
 				}
 				
-				else if(syöte == 3){
+				else if(viesti == 3){
 					out.writeInt(lokero.lukujenKokonaismaara());
 					out.flush();
 				}
