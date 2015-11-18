@@ -25,7 +25,7 @@ public class KommunikaattoriTesti {
 		udpSocket = new DatagramSocket();
 		
 		//Luodaan UDP-paketti
-		byte[] data = ByteBuffer.allocate(4).putInt(3000).array();
+		byte[] data = Integer.toString(XPORT).getBytes();
 		y = InetAddress.getLocalHost();
 		udpPacket = new DatagramPacket(data, data.length, y, YPORT);
 		//-- TCP --------
