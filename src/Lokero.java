@@ -29,13 +29,15 @@ public class Lokero {
 	public int suurinSumma(){
 		int suurin = 0;
 		int portti = 0;
+		int index=0;
 		for (int i = 0; i < summat.length; i++){
 			if (summat[i][0] > suurin){
 				suurin = summat[i][0];
 				portti = summat[i][1];
+				index = i;
 			}
 		}//for
-		return portti;
+		return index +1;
 	}
 	
 	
