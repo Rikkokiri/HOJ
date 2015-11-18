@@ -6,10 +6,13 @@ public class Lokero {
 
 	//Konstruktori
 	//lkm = summauspalvelijoiden lukumäärä
-	public Lokero(int lkm){
+	public Lokero(int lkm, int[] portit){
 		this.summat = new int[lkm][2];
 		this.summaustenLkm = 0;
-	}//Konstruktori
+		for (int i = 0; i < lkm; i++){
+			summat[i][1] = portit[i];
+		}
+	}
 	
 	
 	//Kaikkien summauspalvelijoiden kokonaissumma
@@ -17,9 +20,9 @@ public class Lokero {
 		int summa = 0;
 		for (int i = 0; i < summat.length; i++){
 			summa = summa + summat[i][0];
-		}//for
+		}
 		return summa;
-	}//kokonaissumma
+	}
 	
 	
 	//Palauttaa summauspalvelijan portin, jossa laskettu suurin summa
@@ -30,16 +33,16 @@ public class Lokero {
 			if (summat[i][0] > suurin){
 				suurin = summat[i][0];
 				portti = summat[i][1];
-			}//if
+			}
 		}//for
 		return portti;
-	}//suurinSumma
+	}
 	
 	
 	//Palauttaa summattujen lukujen kokonaismäärän
 	public int lukujenKokonaismaara(){
 		return this.summaustenLkm;
-	}//lukujenKokonaismaara
+	}
 	
 	
 	//Lisää summat -taulukkoon tietyn summauspalvelijan saaman luvun
@@ -49,8 +52,14 @@ public class Lokero {
 			if (summat[i][1] == portti){
 				summat[i][0] = summat[i][0] + luku;
 				break;
-			}//if
+			}
 		}//for
-	}//lisaaLuku
+	}
+	
+	
+	//Turha, käytettiin testauksessa
+	public int[][] getSummat(){
+		return this.summat;
+	}
 	
 }
