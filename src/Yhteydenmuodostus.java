@@ -9,29 +9,50 @@ public class Yhteydenmuodostus {
 	private static final int XPORT = 3000; //TODO määrittele/vaihda
 	private DatagramSocket udpSocket;
 	private DatagramPacket udpPacket;
-	//Testausta varten
-	private InetAddress y;
+	
+	//Kohteen osoite
+	private InetAddress kohdeosoite;
 
 	//TCP
 	private Socket socket;
 	private ServerSocket server;
 	
 	//Konstruktori
-	public KommunikaattoriTesti() throws IOException{
+	public Yhteydenmuodostus(String iposoite) throws IOException{
 
 		//-- UDP --------
 		//Luodaan UDP-soketti
 		udpSocket = new DatagramSocket();
-		
-		//Luodaan UDP-paketti
+		//Valmistellaan udp-pakettiin tarvittavat tiedot, data ja kohdeosoite
 		byte[] data = Integer.toString(XPORT).getBytes();
-		y = InetAddress.getLocalHost();
+		kohdeosoite = InetAddress.getByName(iposoite);
+		//Luodaan UDP-paketti
 		udpPacket = new DatagramPacket(data, data.length, y, YPORT);
+		
 		//-- TCP --------
 		server = new ServerSocket(XPORT);
 
 	}//Konstruktori
 
+	//Konstruktori
+		public Yhteydenmuodostus() throws IOException{
+
+			//-- UDP --------
+			//Luodaan UDP-soketti
+			udpSocket = new DatagramSocket();
+			//Valmistellaan udp-pakettiin tarvittavat tiedot, data ja kohdeosoite
+			byte[] data = Integer.toString(XPORT).getBytes();
+			kohdeosoite = InetAddress.getLocalHost();
+			//Luodaan UDP-paketti
+			udpPacket = new DatagramPacket(data, data.length, y, YPORT);
+			
+			//-- TCP --------
+			server = new ServerSocket(XPORT);
+
+		}//Konstruktori
+	
+	//-------------------------------------------------	
+		
 	//TODO Nimeä metodi fiksummin
 	//lahetaPortti: Lähettää Y:lle UDP-paketin, joka 
 	public boolean lahetaPortti() throws IOException{
