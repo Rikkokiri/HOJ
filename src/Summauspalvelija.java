@@ -8,6 +8,7 @@ public class Summauspalvelija extends Thread{
 	ServerSocket server;
 	Socket s;
 	int t;						//Väliaikainen muuttuja summattavalle luvule
+	private volatile boolean stop;
 	
 	//Konstruktori
 	public Summauspalvelija(int portti, Lokero l){
@@ -24,15 +25,18 @@ public class Summauspalvelija extends Thread{
 			InputStream iS = s.getInputStream();
 			ObjectInputStream in = new ObjectInputStream(iS);
 			s.setSoTimeout(3000);
-			while(true){
+			
+			while(true && !stop){
 				try{
 					t = in.readInt();
+					if(t == 0){
+						requestStop();
+					}
 				} catch (EOFException eof){
 					break;
 				}
 				lokero.lisaaLuku(t, PORT);
 			}//while		
-
 		} catch (Exception e){
 			throw new Error(e.toString());
 		}
@@ -40,10 +44,24 @@ public class Summauspalvelija extends Thread{
 		try{
 			s.close();
 			server.close();
+			Thread.currentThread().interrupt();
+			
 		} catch (IOException a){
 			throw new Error(a.toString());
 		}
 	}//run
 	
+	public void requestStop(){ //TODO
+		stop = true;
+		//s.close();
+		//server.close();
+		Thread.currentThread().interrupt();
+		try{
+			s.close();
+			server.close();
+		} catch(IOException e){
+			System.out.println(e.getMessage());
+		}
+	}
 	
 }//Summauspalvelija

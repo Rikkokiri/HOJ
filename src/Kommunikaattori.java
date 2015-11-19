@@ -109,12 +109,25 @@ public class Kommunikaattori extends Thread{
 		
 		System.out.println("Ohjelman suorituksen tulisi päättyä."); //REMOVE
 		
+		/*
 		//Lopetetaan summauspalvelijat
 		for(int i = 0; i < porttienLkm; i++){
 			summauspalvelijat[i].interrupt();
 			System.out.println("Pysäytettiinkö thread?");
 			//summauspalvelijat[i].close();
-			
+		}
+		*/
+		
+		//Lopetetaan summauspalvelijat
+				for(int i = 0; i < porttienLkm; i++){
+					summauspalvelijat[i].requestStop();
+					System.out.println("Pysäytettiinkö thread " + summauspalvelijat[i].getName() + "?");
+					//System.out.println(summauspalvelijat[i].isInterrupted());
+					//summauspalvelijat[i].close();
+				}
+		
+		for(int i = 0; i < porttienLkm; i++){
+			System.out.println("Is " + summauspalvelijat[i] + " alive? " + summauspalvelijat[i].isAlive());
 		}
 		
 		try{
@@ -124,6 +137,7 @@ public class Kommunikaattori extends Thread{
 		} catch(IOException e){
 			//TODO
 		}
+		
 		
 		
 	}// run
