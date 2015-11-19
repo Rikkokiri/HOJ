@@ -25,8 +25,9 @@ public class Summauspalvelija extends Thread{
 			ObjectInputStream in = new ObjectInputStream(iS);
 			s.setSoTimeout(3000);
 			while(true){
-				t = in.readInt();
-				if (Thread.currentThread().isInterrupted()){
+				try{
+					t = in.readInt();
+				} catch (EOFException eof){
 					break;
 				}
 				lokero.lisaaLuku(t, PORT);
