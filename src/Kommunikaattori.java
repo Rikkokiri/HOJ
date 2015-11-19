@@ -111,6 +111,8 @@ public class Kommunikaattori extends Thread{
 		
 		//Lopetetaan summauspalvelijat
 		for(int i = 0; i < porttienLkm; i++){
+			summauspalvelijat[i].interrupt();
+			System.out.println("Pysäytettiinkö thread?");
 			summauspalvelijat[i].close();
 			
 		}
