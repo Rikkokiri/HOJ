@@ -1,6 +1,5 @@
 import java.io.*;
 import java.net.*;
-import java.nio.ByteBuffer;
 
 public class Yhteydenmuodostus {
 

@@ -28,15 +28,7 @@ public class Summauspalvelija extends Thread{
 			while(t!=0){
 				t = in.readInt();
 				lokero.lisaaLuku(t, PORT);
-			}//while	
-		} catch (EOFException eof){
-			try{
-				s.close();
-				server.close();
-				t=0;
-			}catch (Exception f){
-				throw new Error(f.toString());
-			}
+			}//while		
 		} catch (Exception e){
 			throw new Error(e.toString());
 		}
@@ -44,7 +36,6 @@ public class Summauspalvelija extends Thread{
 		try{
 			s.close();
 			server.close();
-			t=0;
 		} catch (IOException a){
 			throw new Error(a.toString());
 		}
@@ -53,6 +44,7 @@ public class Summauspalvelija extends Thread{
 	//Sammutusmetodi
 	public void close(){
 	t = 0;
+	
 	}
 	
 }//Summauspalvelija
