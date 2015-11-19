@@ -48,7 +48,7 @@ public class Lokero {
 	
 	//Lisää summat -taulukkoon tietyn summauspalvelijan saaman luvun
 	synchronized public void lisaaLuku(int luku, int portti){
-		summaustenLkm = summaustenLkm + 1;
+		//summaustenLkm = summaustenLkm + 1;
 		
 		for (int i = 0; i < summat.length;i++){
 			if (summat[i][1] == portti){
@@ -56,6 +56,8 @@ public class Lokero {
 				break;
 			}
 		}//for	
+		
+		summaustenLkm = summaustenLkm + 1;
 		
 	}
 	
