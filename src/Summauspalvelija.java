@@ -24,11 +24,14 @@ public class Summauspalvelija extends Thread{
 			InputStream iS = s.getInputStream();
 			ObjectInputStream in = new ObjectInputStream(iS);
 			s.setSoTimeout(3000);
-			//Lisätään lukuja kunnes tulee 0
-			while(t!=0){
+			while(true){
 				t = in.readInt();
+				if (Thread.currentThread().isInterrupted()){
+					break;
+				}
 				lokero.lisaaLuku(t, PORT);
 			}//while		
+
 		} catch (Exception e){
 			throw new Error(e.toString());
 		}
@@ -41,10 +44,5 @@ public class Summauspalvelija extends Thread{
 		}
 	}//run
 	
-	//Sammutusmetodi
-	public void close(){
-	t = 0;
-	
-	}
 	
 }//Summauspalvelija
