@@ -65,10 +65,11 @@ public class Yhteydenmuodostus {
 
 		while(toistoja < 5 && !vastausSaatu){
 			
+			System.out.println("Lähetetään " + (toistoja+1) + ". pakettia...");
 			udpSocket.send(udpPacket);
 
 			try{
-				System.out.println("Päästäänkö tänne?");
+
 				socket = server.accept();
 				
 				//Testausta varten
