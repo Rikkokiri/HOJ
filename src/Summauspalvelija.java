@@ -34,7 +34,6 @@ public class Summauspalvelija extends Thread{
 						break;
 					}
 				} catch (EOFException eof){
-					System.out.println("Tapahtuuko EOF?");
 					break;
 				}
 				lokero.lisaaLuku(t, PORT);
@@ -43,26 +42,13 @@ public class Summauspalvelija extends Thread{
 			throw new Error(e.toString());
 		}
 		
-		System.out.println("Mennäänkö tänne? Onko elossa? " + Thread.currentThread().isAlive());
-		/*
-		try{
-			s.close();
-			server.close();
-			Thread.currentThread().interrupt();
-			
-		} catch (IOException a){
-			throw new Error(a.toString());
-		}
-		*/
 	}//run
 	
 	public void requestStop(){ //TODO
 		stop = true;
-		//s.close();
-		//server.close();
 		Thread.currentThread().interrupt();
+		
 		try{
-			
 			s.close();
 			server.close();
 		} catch(IOException e){
