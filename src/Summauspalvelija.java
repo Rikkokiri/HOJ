@@ -3,7 +3,7 @@ import java.net.*;
 
 public class Summauspalvelija extends Thread{
 	
-	final int PORT;
+	final int PORT; // Portti, jota summauspalvelija kuuntelee
 	Lokero lokero;
 	ServerSocket server;
 	Socket s;
@@ -21,32 +21,36 @@ public class Summauspalvelija extends Thread{
 	public void run(){
 		try{
 			server = new ServerSocket(PORT);
-			s = server.accept();
+			s = server.accept(); // Yhteyden muodostus
+			
+			//Datavirtojen luonti
 			InputStream iS = s.getInputStream();
 			ObjectInputStream in = new ObjectInputStream(iS);
+			
 			s.setSoTimeout(3000);
 			
-			while(true && !stop){
+			// Looppi lukujen vastaanottamiseen/lukemiseen
+			while(!stop){
 				try{
-					t = in.readInt();
+					t = in.readInt(); //Luetaan datavirrasta seuraava summattava luku
 					if(t == 0){
-						//requestStop();
 						break;
 					}
 				} catch (EOFException eof){
 					break;
 				}
+				// Summattavan luvun lisäys lokero-olioon
 				lokero.lisaaLuku(t, PORT);
 			}//while		
+			
 		} catch (Exception e){
 			throw new Error(e.toString());
 		}
-		
 	}//run
 	
+	// Metodi, jolla tapetaan thread (suljetaan soketit)
 	public void requestStop(){ //TODO
 		stop = true;
-		Thread.currentThread().interrupt();
 		
 		try{
 			s.close();
