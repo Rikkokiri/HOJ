@@ -52,31 +52,22 @@ public class Kommunikaattori extends Thread{
 				out.writeInt(-1);
 				out.flush();
 			} catch (IOException exception){
-				//TODO
+				
 			}
-			
-			System.out.println("Ei saa.");
-			
-			//TODO Sammuta ohjelma
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}//TODO kommentoi
-		
-		//TODO kommentoi
+		}
 			
 		try{
 			socket.setSoTimeout(0);
-			
-			
-			
+
 			while(true){
 				viesti = in.readInt();
 			
 				if(viesti == 0){
 					break;
-					//TODO sammutus
 				}
 				
 				//Palautetaan välitettyjen lukujen kokonaissumma
@@ -107,23 +98,10 @@ public class Kommunikaattori extends Thread{
 		
 		//break hyppää tänne
 		
-		System.out.println("Ohjelman suorituksen tulisi päättyä."); //REMOVE
-		
-		/*
-		//Lopetetaan summauspalvelijat
-		for(int i = 0; i < porttienLkm; i++){
-			summauspalvelijat[i].interrupt();
-			System.out.println("Pysäytettiinkö thread?");
-			//summauspalvelijat[i].close();
-		}
-		*/
-		
 		//Lopetetaan summauspalvelijat
 				for(int i = 0; i < porttienLkm; i++){
 					summauspalvelijat[i].requestStop();
 					System.out.println("Pysäytettiinkö thread " + summauspalvelijat[i].getName() + "?");
-					//System.out.println(summauspalvelijat[i].isInterrupted());
-					//summauspalvelijat[i].close();
 				}
 		
 		for(int i = 0; i < porttienLkm; i++){
@@ -137,14 +115,12 @@ public class Kommunikaattori extends Thread{
 		} catch(IOException e){
 			//TODO
 		}
-		
-		
-		
+			
 	}// run
 	
-	public void alustaSummauspalvelijat(){ //Nimeä uudelleen
+	public void alustaSummauspalvelijat(){
 		
-		//Alustetaan portit //TODO
+		//Alustetaan portit
 		portit = new int[porttienLkm];
 		
 		for(int i = 0; i < porttienLkm; i++ ){
@@ -154,6 +130,7 @@ public class Kommunikaattori extends Thread{
 		//Luodaan tallenustila summauspalvelijoiden saamille luvuille
 		lokero = new Lokero(porttienLkm, portit);
 		
+		//Alustetaan taulukko, johon summauspalvelijat tallennetaan
 		summauspalvelijat = new Summauspalvelija[porttienLkm];
 		
 		try{
@@ -165,8 +142,8 @@ public class Kommunikaattori extends Thread{
 			}
 		} catch (IOException e){
 			e.setStackTrace(getStackTrace()); //TODO
-		}
-		
+		}	
 	}
+
 		
 }//Kommunikaattori-luokka
