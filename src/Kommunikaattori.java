@@ -23,7 +23,7 @@ public class Kommunikaattori extends Thread{
 		try{
 			
 			System.out.println("Käynnistetään Kommunikaattori-thread..."); //REMOVE
-
+			
 			InputStream input = socket.getInputStream();
 			OutputStream output = socket.getOutputStream();
 			
@@ -33,17 +33,16 @@ public class Kommunikaattori extends Thread{
 			socket.setSoTimeout(5000);
 			
 		}catch(IOException e){
-			//TODO
+			//Lopetetaan thread
+			return;
 		}
 		
 		
 		//Porttien lukumäärä Y:ltä
 		try{
 				porttienLkm = in.readInt();
-				System.out.println("porttienLkm tarvitaan: " + porttienLkm); //TODO
 				
 				//METODIKUTSU luo summauspalvelijat yms yms.
-				//TODO
 				alustaSummauspalvelijat();
 				
 		}catch(SocketTimeoutException e){ //Porttien lukumäärää ei saatu.
@@ -51,13 +50,15 @@ public class Kommunikaattori extends Thread{
 			try{
 				out.writeInt(-1);
 				out.flush();
+				return;
 			} catch (IOException exception){
-				
+				return;
 			}
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
 		}
 			
 		try{
@@ -93,7 +94,7 @@ public class Kommunikaattori extends Thread{
 			} // while
 			
 		}catch(IOException e){
-			
+			return;
 		}
 		
 		//break hyppää tänne
@@ -112,8 +113,9 @@ public class Kommunikaattori extends Thread{
 			out.close();
 			in.close();
 			socket.close();
+			return;
 		} catch(IOException e){
-			//TODO
+			return;
 		}
 			
 	}// run
@@ -141,9 +143,8 @@ public class Kommunikaattori extends Thread{
 				out.flush();
 			}
 		} catch (IOException e){
-			e.setStackTrace(getStackTrace()); //TODO
+			e.setStackTrace(getStackTrace());
 		}	
 	}
 
-		
 }//Kommunikaattori-luokka

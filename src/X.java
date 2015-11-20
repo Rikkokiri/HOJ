@@ -7,11 +7,23 @@ public class X{
 		
 		if (args.length == 0){
 			Yhteydenmuodostus uusiyhteys = new Yhteydenmuodostus();
-			uusiyhteys.lahetaPortti();
+			boolean vastausSaatu = uusiyhteys.lahetaPortti();
+			
+			if(vastausSaatu == false){
+				System.out.println("Suljetaan sovellus.");
+				System.exit(2000);
+			}
+			
 		}
 		else{
 			Yhteydenmuodostus uusiyhteys = new Yhteydenmuodostus(args[0]);
-			uusiyhteys.lahetaPortti();
+			boolean vastausSaatu = uusiyhteys.lahetaPortti();
+			
+			if(vastausSaatu == false){
+				System.out.println("Suljetaan sovellus.");
+				System.exit(2000);
+			}
+			
 		}
 		
 	}//main

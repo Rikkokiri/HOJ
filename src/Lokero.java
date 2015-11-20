@@ -21,7 +21,7 @@ public class Lokero {
 		for (int i = 0; i < summat.length; i++){
 			summa = summa + summat[i][0];
 		}
-		System.out.println("Summa on" + summa);
+		System.out.println("Summa on " + summa);
 		return summa;
 	}
 	

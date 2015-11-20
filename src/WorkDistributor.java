@@ -20,6 +20,7 @@ public class WorkDistributor {
 		}
 		DatagramSocket ds = new DatagramSocket(PORT);
 		ds.setSoTimeout(500000); // 500 sekuntia
+		
 		try {
 			while (true) {
 				byte[] byteArea = new byte[256];
