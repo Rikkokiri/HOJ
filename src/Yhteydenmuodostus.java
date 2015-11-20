@@ -3,20 +3,20 @@ import java.net.*;
 
 public class Yhteydenmuodostus {
 
-	//Y:n portti, johon sovellus ottaa yhteyttä
-	private static final int YPORT = 3129; //Suojausmääre? 
-	private static final int XPORT = 3000; //TODO määrittele/vaihda
-	private DatagramSocket udpSocket;
+	
+	private static final int YPORT = 3129; //Y:n portti, johon sovellus ottaa yhteyttä
+	private static final int XPORT = 3000; //X:n portti, johon Y:n halutaan ottavan yhteyttä
+	private DatagramSocket udpSocket; 
 	private DatagramPacket udpPacket;
 	
 	//Kohteen osoite
 	private InetAddress kohdeosoite;
 
-	//TCP
+	//TCP-soketit
 	private Socket socket;
 	private ServerSocket server;
 	
-	//Konstruktori
+	//Konstruktori, joka vaatii parametriksi ip-osoitteen (String)
 	public Yhteydenmuodostus(String iposoite) throws IOException{
 
 		//-- UDP --------
@@ -33,7 +33,8 @@ public class Yhteydenmuodostus {
 
 	}//Konstruktori
 
-	//Konstruktori
+	//Konstruktori, jota kutsutaan, kun suoritetaan Y:tä ja X:ää samalla koneella
+	//attribuutti kohdeosoite = localhost
 		public Yhteydenmuodostus() throws IOException{
 
 			//-- UDP --------
@@ -52,8 +53,7 @@ public class Yhteydenmuodostus {
 	
 	//-------------------------------------------------	
 		
-	//TODO Nimeä metodi fiksummin
-	/*lahetaPortti: Lähettää Y:lle UDP-paketin, joka sisältää X:n portin,
+	/* lahetaPortti: Lähettää Y:lle UDP-paketin, joka sisältää X:n portin,
 	 * johon Y:n halutaan ottavan yhteyttä */
 	public boolean lahetaPortti() throws IOException{
 		
